@@ -10,9 +10,9 @@ export function createMarkup(obj) {
       comments,
       downloads,
     }) => `
-    <li class="card">
+    <li class="card-item">
         <a href="${largeImageURL}">
-            <img src="${webformatURL}" alt="${tags}" class="img"/>
+            <img src="${webformatURL}" alt="${tags}" class="img-web"/>
         </a>
         <div class="information">
             <div class="descr">

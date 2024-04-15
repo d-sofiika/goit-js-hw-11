@@ -1,8 +1,9 @@
 
+import iziToast from "izitoast";
+import "izitoast/dist/css/iziToast.min.css";
 
 
-
-export async function fetch(nameImg, loader) {
+export function doFetch(nameImg, loader) {
     const BASE_URL = "https://pixabay.com/api/";
     const API_KEY = "43384169-ca1a4d081c57b6f9f4fa25679";
 
@@ -17,7 +18,8 @@ export async function fetch(nameImg, loader) {
     })
     
     return fetch(`${BASE_URL}?${params}`)
-    .then(response => {
+        .then(response => {
+        console.log(response);
         if(!response.ok) {
             throw new Error(response.status)
         }

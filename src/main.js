@@ -10,8 +10,7 @@ import 'izitoast/dist/css/iziToast.min.css';
 const form = document.querySelector('.form-search');
 const placeImg = document.querySelector('.card-container');
 const loader = document.querySelector('.loader');
-loader.style.borderColor = 'white';
-loader.style.borderBottomColor = 'transparent';
+loader.style.display = "none";
 
 const book = new SimpleLightbox('.card-item a', {
   captionsData: 'alt',
@@ -24,14 +23,13 @@ form.addEventListener('submit', handleSubmit);
 async function handleSubmit(event) {
   event.preventDefault();
   placeImg.innerHTML = '';
-
-  loader.style.borderColor = 'black';
-  loader.style.borderBottomColor = 'transparent';
+  loader.style.display = "block";
+  
   const nameImg = event.currentTarget.elements.text.value;
-
-  doFetch(nameImg, loader, placeImg)
+  setTimeout(() => {
+	doFetch(nameImg, loader, placeImg)
     .then(data => {
-      if (nameImg === '') {
+      if (nameImg === '' || data.hits.length === 0) {
         iziToast.show({
           title: 'Ops.',
           titleColor: 'white',
@@ -63,7 +61,9 @@ async function handleSubmit(event) {
       });
     })
     .finally(() => {
-      loader.style.borderColor = 'black';
-      loader.style.borderBottomColor = 'transparent';
+      
+      loader.style.display = "none";
     });
+  }, 1000);
+  
 }
